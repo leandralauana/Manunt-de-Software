@@ -17,16 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from livros.views import LivroViewSet
-from usuarios.views import UsuarioViewSet
 from emprestimos.views import EmprestimoViewSet
 
 router = DefaultRouter()
-router.register(r'livros', LivroViewSet)
-router.register(r'usuarios', UsuarioViewSet)
-router.register(r'emprestimos', EmprestimoViewSet)
+router.register(r'emprestimos', EmprestimoViewSet, basename='emprestimo')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
 ]
+

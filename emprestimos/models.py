@@ -10,5 +10,10 @@ class Emprestimo(models.Model):
     data_devolucao = models.DateTimeField(blank=True, null=True)
     devolvido = models.BooleanField(default=False)
 
-    def __str__(self):
-        return f'{self.livro.titulo} emprestado para {self.usuario.nome}'
+    def dar_baixa(self):
+        if not self.devolvido:
+            self.devolvido = True
+            self.data_devolucao = now()
+            self.livro.disponivel = True
+            self.livro.save()
+            self.save()
